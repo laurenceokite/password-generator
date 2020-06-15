@@ -10,33 +10,37 @@ function generatePassword() {
     var specialCharacters = window.confirm("Would you like your password to contain special characters? Select 'cancel' for no.");
 
     if (lowerCase) {
-      var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+      var passString = passString + "abcdefghijklmnopqrstuvwxyz";
     } else {
-      var lowerCase = null;
+      passString = "";
     }
 
     if (upperCase) {
-      var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    } else {
-      var upperCase = null;
+      var passString = passString + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 
     if (passNumbers) {
-      var passNumbers = "0123456789";
-    } else {
-      var passNumbers = null;
-    }
+      var passString = passString + "0123456789";
+    } 
 
     if (specialCharacters) {
-      var specialCharacters = "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    } else {
-      var specialCharacters = null;
+      var passString = passString + "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    } 
+
+    if ((!lowerCase)&&(!upperCase)&&(!passNumbers)&&(!specialCharacters)) {
+      var noCategory = window.alert("Please choose at least one category.");
+      if (noCategory) {
+        generatePassword();
+      }
     }
+
+    console.log(passString);
 
     function makePass(length) {
       var result = '';
-      var characters = lowerCase + upperCase + passNumbers + specialCharacters;
+      var characters = passString;
       var charactersLength = characters.length;
+      console.log(characters)
       for ( var i = 0; i < length; i++ ) {
          result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
